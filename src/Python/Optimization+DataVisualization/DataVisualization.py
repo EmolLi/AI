@@ -1,17 +1,16 @@
-import plotly.plotly as py
-import plotly.graph_objs as go
+from openpyxl import Workbook
 
 
-def gen_graph(x_list, y_list, f_name):
-    trace = go.Scatter(
-        x = x_list,
-        y = y_list,
-        mode = 'markers'
-    )
-    data = [trace]
+def newWorkbook():
+    wb = Workbook()
+    ws = wb.active
+    return ws, wb
 
 
-    # Plot and embed in ipython notebook!
-    py.plot(data, filename= f_name)
+def gen_graph(data, ws):
+    for row in data:
+        ws.append(row)
 
-# or plot with: plot_url = py.plot(data, filename='basic-line')
+
+def save(wb):
+    wb.save("dataAnalysze.xlsx")
